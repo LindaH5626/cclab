@@ -1,4 +1,4 @@
-let sinX = 0;
+let sinX = 1;
 let timeToBeatAgain = 0;
 let sinXAtPreviousPause = 0;
 let originalSize = 200; // heart original size
