@@ -37,13 +37,36 @@ class LindaDancer {
     this.x = startX;
     this.y = startY;
     this.rectColor = color(240, 210, 80);
-    // add properties for your dancer here:
-    //..
-    //..
-    //..
+    this.handAngle = 0; // 初始手臂角度
+    this.handDirection = 1; // 手臂挥舞方向
+    this.handSwingSpeed = 0.05; // 手臂挥舞速度
+    this.legAngle = 0; // 初始腿部角度
+    this.legDirection = 1; // 腿部动作方向
+    this.legMoveSpeed = 0.05; // 腿部动作速度
+    this.verticalOffset = 0; // 垂直偏移量
+    this.verticalSpeed = 2; // 垂直运动速度
+    
   }
   update() {
     this.rectColor = color(random(255), random(255), random(255));
+    this.handAngle += this.handSwingSpeed * this.handDirection;
+    
+    // 反转手臂挥舞方向
+    if (this.handAngle > PI / 4 || this.handAngle < -PI / 4) {
+      this.handDirection *= -1;
+    }
+    this.legAngle += this.legMoveSpeed * this.legDirection;
+    
+    // 反转腿部动作方向
+    if (this.legAngle > PI / 4 || this.legAngle < -PI / 4) {
+      this.legDirection *= -1;
+    }
+    this.verticalOffset += this.verticalSpeed;
+    
+    // 反向改变垂直运动方向
+    if (this.verticalOffset >= 100 || this.verticalOffset <= -100) {
+      this.verticalSpeed *= -1;
+    }
     // update properties here to achieve
     // your dancer's desired moves and behaviour
   }
@@ -52,7 +75,7 @@ class LindaDancer {
     // places your whole dancer object at this.x and this.y.
     // you may change its position on line 19 to see the effect.
     push();
-    translate(this.x, this.y);
+    translate(this.x, this.y + this.verticalOffset);
 
     // ******** //
     // ⬇️ draw your dancer from here ⬇️
@@ -64,12 +87,14 @@ class LindaDancer {
     line(0, -50, 0, 60); // 身体直线
 
     // 添加两只手
-    line(0, 0, -30, 30); // 左手
-    line(0, 0, 30, 30); // 右手
+    let handOffset = sin(this.handAngle) * 30;
+    line(0, 0, -30 - handOffset, 30); // 左手
+    line(0, 0, 30 + handOffset, 30); // 右手
 
     // 添加两条腿
-    line(0, 60, -30, 100); // 左腿
-    line(0, 60, 30, 100); // 右腿
+    let legOffset = sin(this.legAngle) * 20;
+    line(0, 60, -30 - legOffset, 100); // 左腿
+    line(0, 60, 30 + legOffset, 100); // 右腿
     
     noStroke();
     fill(250,100,70);
@@ -102,7 +127,7 @@ class LindaDancer {
     // it is using "this" because this function, too, 
     // is a part if your Dancer object.
     // comment it out or delete it eventually.
-    this.drawReferenceShapes()
+    // this.drawReferenceShapes()
 
     pop();
   }
