@@ -1,14 +1,4 @@
-/*
-  Check our the GOAL and the RULES of this exercise at the bottom of this file.
-  
-  After that, follow these steps before you start coding:
 
-  1. rename the dancer class to reflect your name (line 35).
-  2. adjust line 20 to reflect your dancer's name, too.
-  3. run the code and see if a square (your dancer) appears on the canvas.
-  4. start coding your dancer inside the class that has been prepared for you.
-  5. have fun.
-*/
 
 let dancer;
 
@@ -37,33 +27,33 @@ class LindaDancer {
     this.x = startX;
     this.y = startY;
     this.rectColor = color(240, 210, 80);
-    this.handAngle = 0; // 初始手臂角度
-    this.handDirection = 1; // 手臂挥舞方向
-    this.handSwingSpeed = 0.05; // 手臂挥舞速度
-    this.legAngle = 0; // 初始腿部角度
-    this.legDirection = 1; // 腿部动作方向
-    this.legMoveSpeed = 0.05; // 腿部动作速度
-    this.verticalOffset = 0; // 垂直偏移量
-    this.verticalSpeed = 2; // 垂直运动速度
+    this.handAngle = 0; 
+    this.handDirection = 1; 
+    this.handSwingSpeed = 0.05; 
+    this.legAngle = 0; 
+    this.legDirection = 1; 
+    this.legMoveSpeed = 0.05; 
+    this.verticalOffset = 0; 
+    this.verticalSpeed = 2; 
     
   }
   update() {
     this.rectColor = color(random(255), random(255), random(255));
     this.handAngle += this.handSwingSpeed * this.handDirection;
     
-    // 反转手臂挥舞方向
+  
     if (this.handAngle > PI / 4 || this.handAngle < -PI / 4) {
       this.handDirection *= -1;
     }
     this.legAngle += this.legMoveSpeed * this.legDirection;
     
-    // 反转腿部动作方向
+    
     if (this.legAngle > PI / 4 || this.legAngle < -PI / 4) {
       this.legDirection *= -1;
     }
     this.verticalOffset += this.verticalSpeed;
     
-    // 反向改变垂直运动方向
+    
     if (this.verticalOffset >= 100 || this.verticalOffset <= -100) {
       this.verticalSpeed *= -1;
     }
@@ -86,15 +76,16 @@ class LindaDancer {
     strokeWeight(10);
     line(0, -50, 0, 60); // 身体直线
 
-    // 添加两只手
+    // hands
     let handOffset = sin(this.handAngle) * 30;
-    line(0, 0, -30 - handOffset, 30); // 左手
-    line(0, 0, 30 + handOffset, 30); // 右手
+    line(0, 0, -30 - handOffset, 30); // left
+    line(0, 0, 30 + handOffset, 30); // right
 
-    // 添加两条腿
+    // legs
     let legOffset = sin(this.legAngle) * 20;
-    line(0, 60, -30 - legOffset, 100); // 左腿
-    line(0, 60, 30 + legOffset, 100); // 右腿
+    line(0, 60, -30 - legOffset, 100); // left
+    line(0, 60, 30 + legOffset, 100); // right
+    
     
     noStroke();
     fill(250,100,70);
