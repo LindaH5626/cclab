@@ -1,0 +1,42 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+.miniHeadline{
+  color: red;
+  background-color: cadetblue;
+}
+.specialHighlight{
+  color: whitesmoke;
+  background-color:black;
+}
+
+.textBox{
+  background-color: aquamarine;
+  width: 200px;
+  /* outline-color: black;
+  outline-width: 1px;
+  outline-style: dashed; */
+  border: black 1px dashed;
+  padding: 10px;
+  margin: 5px;
+  margin-left: 10px;
+
+}
+
+.box1{
+  position: absolute;
+  left: 350px;
+  top: 20px;
+}
+
+.box2{
+  position: fixed;
+  left: 100px;
+  top: 20px;
+}

@@ -1,0 +1,36 @@
+body{
+    margin:0;
+}
+.header{
+    margin: auto;
+    text-align: center;
+}
+
+.wrapper{
+    margin: auto;
+    width:100%;
+    max-width: 900px;
+    background-color: rgb(208, 255, 0);
+}
+
+.column{
+    display: inline-block;
+    width: 32%;
+    hyphens: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.middle-column img{
+    width: 100%;
+}
+
+
+.left-column{
+    background-color: red;
+}
+.middle-column{
+    background-color: red;
+}
+.right-column{
+    background-color: red;
+} 
