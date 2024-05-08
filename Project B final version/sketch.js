@@ -3,7 +3,7 @@ let numCans = 30;
 
 
 function setup() {
-  let canvas = createCanvas(windowWidth, 200);
+  let canvas = createCanvas(windowWidth, 400);
   canvas.parent("canvasContainer");
   background(0);
 
