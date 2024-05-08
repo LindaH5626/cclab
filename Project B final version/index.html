@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a trash can of my life</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="libraries/p5.min.js"></script>
+<style>
+    .fzy{
+        display:none; 
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;margin-top: 100px;font-size: 20px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-family: 'Courier New', Courier, monospace;font-size: 50px;">Please Dig In</h1>
+        <div id="father" style="position: absolute;width: 500px;height: 500px;">
+        <img id="mainImage" src="pics/trash can.png" alt="Main Image">
+    </div>
+    </div>
+    
+    <div class="fzy">
+        Hello Future People! This is all the trash a normal college girl generates in a day. <br>
+        Suppose you are curious about it. Feel free to explore! 
+    </div>
+    <div id="popupContainer">
+
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const mainImage = document.getElementById('mainImage');
+    const text = document.querySelector('.fzy');
+    const father = document.getElementById('father');
+    let imagesPlaced = false; 
+
+    const imageArray = [...Array(39).keys()].map(i => `pics/${i+1}.png`);
+
+    mainImage.addEventListener('click', function() {
+        mainImage.src = 'pics/u=4151544104,1885453202&fm=253&fmt=auto&app=138&f=JPEG.webp';
+        text.style.display = 'block';
+        if (!imagesPlaced) {
+            placeRandomImages(imageArray, father);
+            imagesPlaced = true;
+        }
+    });
+});
+
+function placeRandomImages(images, container) {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const radius = 170;
+
+    images.forEach(src => {
+        const imageDiv = document.createElement('div');
+        imageDiv.style.position = 'absolute';
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'popupImage';
+        img.style.cursor = 'grab';
+        let moving = false;
+
+        img.addEventListener('mousedown', function(event) {
+            moving = true;
+            let offsetX = event.clientX - imageDiv.offsetLeft;
+            let offsetY = event.clientY - imageDiv.offsetTop;
+
+            function mouseMoveHandler(event) {
+                if (moving) {
+                    imageDiv.style.left = event.clientX - offsetX + 'px';
+                    imageDiv.style.top = event.clientY - offsetY + 'px';
+                }
+            }
+
+            function mouseUpHandler() {
+                moving = false;
+                window.removeEventListener('mousemove', mouseMoveHandler);
+                window.removeEventListener('mouseup', mouseUpHandler);
+            }
+
+            window.addEventListener('mousemove', mouseMoveHandler);
+            window.addEventListener('mouseup', mouseUpHandler);
+        });
+
+        let validPosition = false;
+        let x, y;
+        while (!validPosition) {
+            let angle = Math.random() * 2 * Math.PI;
+            let distance = Math.random() * radius;
+            x = centerX + distance * Math.cos(angle) - img.width / 2;
+            y = centerY + distance * Math.sin(angle) - img.height / 2;
+            if (Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2) <= Math.pow(radius, 2)) {
+                validPosition = true;
+            }
+        }
+
+        imageDiv.appendChild(img);
+        imageDiv.style.left = x + 'px';
+        imageDiv.style.top = y + 'px';
+        document.body.appendChild(imageDiv); 
+    });
+}
+
+
+    </script>
+    <div id="canvasContainer"></div>
+     <script src="sketch.js"></script>
+</body>
+</html>

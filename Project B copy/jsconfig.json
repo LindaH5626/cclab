@@ -1,0 +1,7 @@
+{
+  "include": [
+    "../Project B final version/*.js",
+    "../Project B final version/**/*.js",
+    "/Users/MOQN/.vscode/extensions/samplavigne.p5-vscode-1.2.12/p5types/global.d.ts"
+  ]
+}
